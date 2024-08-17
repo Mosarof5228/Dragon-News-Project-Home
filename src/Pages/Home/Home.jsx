@@ -2,10 +2,13 @@ import Header from "./Shared/Header/Header";
 import LeftSideNav from "./Shared/LeftSideNav/LeftSideNav";
 import Marquee from "react-fast-marquee";
 import Navbar from "./Shared/Navbar/Navbar";
+import NewsCard from "./NewsCard";
 import RightSideNav from "./Shared/RightSideNav/RightSideNav";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 const Home = () => {
+    const news = useLoaderData();
+    console.log(news);
     return (
         <div>
             <Header></Header>
@@ -23,7 +26,12 @@ const Home = () => {
                     <LeftSideNav></LeftSideNav>
                 </div>
                 <div className="border md:col-span-2">
-                    <h2>News Coming Soon...</h2>
+                    {
+                        news.map(singleNews => <NewsCard
+                            key={singleNews._id}
+                            news={singleNews}
+                        ></NewsCard>)
+                    }
                 </div>
                 <div className="">
                     <RightSideNav></RightSideNav>
